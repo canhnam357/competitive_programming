@@ -1,11 +1,9 @@
-template <typename T>
 struct Node {
     int l, r;
     T val;
     Node() : l(0), r(0), val(0) {};
     Node(int l_, int r_, T val_) : l(l_), r(r_), val(val_) {};
 };
-template <typename T>
 struct PST
 {
     vector<Node> tree;
@@ -30,7 +28,7 @@ struct PST
             tree[i].r = i << 1 | 1;
         }
     }
-    void update(int id, int l, int r, T x)
+    void update(int id, int l, int r, int x)
     {
         tree[id].val++;
         if (l != r)
@@ -51,18 +49,18 @@ struct PST
             }
         }
     }
-    T get_kth(int u, int v, int k, int l, int r) {
+    int get_kth(int u, int v, int k, int l, int r) {
         if (l == r) return l;
         int mid = (l + r) >> 1;
         int sz = tree[tree[v].l].val - tree[tree[u].l].val;
         if (sz >= k) return get_kth(tree[u].l, tree[v].l, k, l, mid);
         return get_kth(tree[u].r, tree[v].r, k - sz, mid + 1, r);
     }
-    T get_kth(int l, int r, int k)
+    int get_kth(int l, int r, int k)
     {
         return get_kth(id_root[l - 1], id_root[r], k, 1, sz / 2);
     }
-    void create_node(T val)
+    void create_node(int val)
     {
         id_root[++N] = tree.size(); 
         // N is pos_update
