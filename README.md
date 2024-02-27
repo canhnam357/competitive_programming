@@ -1,1 +1,1 @@
-# competitive_programming
+# TEMPLATE FOR CP
