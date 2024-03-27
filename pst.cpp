@@ -1,8 +1,8 @@
 struct Node {
     int l, r;
-    T val;
+    int val;
     Node() : l(0), r(0), val(0) {};
-    Node(int l_, int r_, T val_) : l(l_), r(r_), val(val_) {};
+    Node(int l_, int r_, int val_) : l(l_), r(r_), val(val_) {};
 };
 struct PST
 {
