@@ -1,60 +1,36 @@
-#include <bits/stdc++.h>
-#define int long long
-using namespace std;
-
-const int mod = 998244353;
-const int sqr_mod = mod * mod;
-
-int power(int a, int n) {
-    if(n == 0)
-        return 1;
-    int ans = power(a, n/2);
-    ans = ans * ans % mod;
-    if(n & 1)
-        return ans * a % mod;
-    else
-        return ans;
-}
-int inverse(int a) {
-    return power(a, mod-2);
-}
-
-struct modint {
-    int val;
-    modint() {val = 0;}
-    modint(int x) {val = (x + sqr_mod) % mod;}
-    modint operator + (modint other) {
-        return val + other.val;
-    }
-    modint operator - (modint other) {
-        return val - other.val;
-    }
-    modint operator * (modint other) {
-        return val * other.val;
-    }
-    modint operator / (modint other) {
-        return val * inverse(other.val);
-    }
+template<int MOD_> struct modint {
+	static constexpr int MOD = MOD_;
+	static_assert(MOD_ > 0, "MOD must be positive");
+private:
+	using ll = long long;
+	int v;
+	static int minv(int a, int m) { a %= m; assert(a); return a == 1 ? 1 : int(m - ll(minv(m, a)) * ll(m) / a); }
+public:
+	modint() : v(0) {}
+	modint(ll v_) : v(int(v_% MOD)) { if (v < 0) v += MOD; }
+	explicit operator int() const { return v; }
+	friend ostream& operator << (ostream& out, const modint& n) { return out << int(n); }
+	friend istream& operator >> (istream& in, modint& n) { ll v_; in >> v_; n = modint(v_); return in; }
+	friend bool operator == (const modint& a, const modint& b) { return a.v == b.v; }
+	friend bool operator != (const modint& a, const modint& b) { return a.v != b.v; }
+	modint inv() const { modint res; res.v = minv(v, MOD); return res; }
+	friend modint inv(const modint& m) { return m.inv(); }
+	modint neg() const { modint res; res.v = v ? MOD - v : 0; return res; }
+	friend modint neg(const modint& m) { return m.neg(); }
+	modint operator - () const { return neg(); }
+	modint operator + () const { return modint(*this); }
+	modint& operator ++ () { v++; if (v == MOD) v = 0; return *this; }
+	modint& operator -- () { if (v == 0) v = MOD; v--; return *this; }
+	modint& operator += (const modint& o) { v += o.v; if (v >= MOD) v -= MOD; return *this; }
+	modint& operator -= (const modint& o) { v -= o.v; if (v < 0) v += MOD; return *this; }
+	modint& operator *= (const modint& o) { v = int(ll(v) * ll(o.v) % MOD); return *this; }
+	modint& operator /= (const modint& o) { return *this *= o.inv(); }
+	friend modint operator ++ (modint& a, int) { modint r = a; ++a; return r; }
+	friend modint operator -- (modint& a, int) { modint r = a; --a; return r; }
+	friend modint operator + (const modint& a, const modint& b) { return modint(a) += b; }
+	friend modint operator - (const modint& a, const modint& b) { return modint(a) -= b; }
+	friend modint operator * (const modint& a, const modint& b) { return modint(a) *= b; }
+	friend modint operator / (const modint& a, const modint& b) { return modint(a) /= b; }
 };
-
-istream& operator >> (istream& is, modint& p) {
-    is >> p.val;
-    return cin;
-}
-ostream& operator << (ostream& os, modint p) {
-    cout << p.val;
-    return cout;
-}
-// Ket qua la
-// 6
-// 998244351
-// 8
-// 499122177
-int32_t main() {
-    modint a = 2;
-    modint b = 4;
-    cout << a+b << "\n";
-    cout << a-b << "\n";
-    cout << a*b << "\n";
-    cout << a/b << "\n";
-}
+const int MOD = (119 << 23) + 1;
+using mint = modint<MOD>;
