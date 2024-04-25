@@ -1,10 +1,11 @@
 struct DSUrb {
-    vector<int> par, r;
+    vector<int> par, r, sz;
     stack<vector<int>> s;
     void init(int n)
     {
         par.resize(n);
         r.resize(n);
+        sz.resize(n, 1);
         iota(par.begin(), par.end(), 0);
     }
     int get(int x) {
@@ -22,9 +23,10 @@ struct DSUrb {
 
         if (r[u] == r[v]) {
             r[u]++;
-            s.push({ u,v,1 });
+            s.push({ u,v,1, sz[v] });
         }
-        else s.push({ u,v,0 });
+        else s.push({ u,v,0, sz[v] });
+        sz[u] += sz[v];
         return true;
     }
 
@@ -34,6 +36,8 @@ struct DSUrb {
             s.pop();
             par[a[1]] = a[1];
             if (a[2] == 1) r[a[0]]--;
+            sz[a[0]] -= a[3];
+            sz[a[1]] = a[3];
         }
     }
 
