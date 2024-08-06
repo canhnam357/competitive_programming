@@ -1,5 +1,8 @@
 const int mod1 = 1035972859;
 const int mod2 = 1704760909;
+const int mod3 = 2137321811;
+const int mod4 = 2002577573;
+const int mod5 = 2143922441;
 const int base = 256;
 struct hashing
 {
