@@ -32,4 +32,8 @@ struct FenWick2D {
 		}
 		return sum;
 	}
+	int get(int x1, int y1, int x2, int y2)
+	{
+		return get(x2, y2) - get(x2, y1 - 1) - get(x1 - 1, y2) + get(x1 - 1, y1 - 1);
+	}
 };
