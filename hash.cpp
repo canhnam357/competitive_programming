@@ -4,14 +4,15 @@ const int mod3 = 2137321811;
 const int mod4 = 2002577573;
 const int mod5 = 2143922441;
 const int base = 256;
+template<typename Container>
 struct hashing
 {
 	int mod;
 	vector<int> h, p, inv;
 	hashing() {}
-	hashing(int mod, string s)
+	hashing(int mod, const Container& s)
 	{
-		int n = s.length();
+		int n = s.size();
 		this->mod = mod;
 		h.resize(n);
 		p.resize(n);
