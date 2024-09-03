@@ -3,6 +3,7 @@
     "files.associations": {
         "*.ejs": "html",
         "iosfwd": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "tuple": "cpp"
     }
 }
