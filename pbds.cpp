@@ -5,5 +5,5 @@ typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics
 .insert(x); // insert x
 .order_of_key(val + 1) - .order_of_key(val) > 0; // check val exists
 .erase(.find_by_order(.order_of_key(c))) // erase c , should check exists before
-.find_by_oder(pos) // s[pos] : 0-indexed
+.find_by_order(pos) // s[pos] : 0-indexed
 .order_of_key(x) // n.o element less than x
